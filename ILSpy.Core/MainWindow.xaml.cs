@@ -140,8 +140,26 @@ namespace ICSharpCode.ILSpy
 			sessionSettings.FilterSettings.PropertyChanged += filterSettings_PropertyChanged;
 			
 			ContextMenuProvider.Add(treeView, decompilerTextView);
-
 		}
+
+		void OnMouseDown(object sender, PointerPressedEventArgs e)
+		{
+			var pointerUpdateKind = e.GetCurrentPoint(null).Properties.PointerUpdateKind;
+			switch (pointerUpdateKind)
+			{
+				case PointerUpdateKind.XButton1Pressed:
+					NavigateHistory(false);
+					break;
+				case PointerUpdateKind.XButton2Pressed:
+					NavigateHistory(true);
+					break;
+				default:
+					return;
+			}
+
+			e.Handled = true;
+		}
+
 		private void InitializeComponent()
 		{
 			AvaloniaXamlLoader.Load(this);
