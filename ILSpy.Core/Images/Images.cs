@@ -327,24 +327,24 @@ namespace ICSharpCode.ILSpy
 			{
                 var image = new WriteableBitmap(new PixelSize(16, 16), new Vector(96, 96), PixelFormat.Rgba8888, AlphaFormat.Unpremul);
 
-				// Avalonia 0.10 - https://github.com/AvaloniaUI/Avalonia/pull/11557
-				using (var rt = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>().CreateRenderTarget(new[] { new WbFb(image)})) {
-
-                    using (var ctx = rt.CreateDrawingContext(null)) {
-
-                        ctx.DrawBitmap(baseImage.PlatformImpl, 1.0, iconRect, iconRect);
-
-                        if (overlay != null) {
-                            ctx.DrawBitmap(overlay.PlatformImpl, 1.0, iconRect, iconRect);
-                        }
-
-                        if (isStatic) {
-                            ctx.DrawBitmap(Images.OverlayStatic.PlatformImpl, 1.0, iconRect, iconRect);
-                        }
-
-                    }
-
-                }
+				// // Avalonia 0.10 - https://github.com/AvaloniaUI/Avalonia/pull/11557
+				// using (var rt = AvaloniaLocator.Current.GetService<IPlatformRenderInterface>().CreateRenderTarget(new[] { new WbFb(image)})) {
+    //
+    //                 using (var ctx = rt.CreateDrawingContext(null)) {
+    //
+    //                     ctx.DrawBitmap(baseImage.PlatformImpl, 1.0, iconRect, iconRect);
+    //
+    //                     if (overlay != null) {
+    //                         ctx.DrawBitmap(overlay.PlatformImpl, 1.0, iconRect, iconRect);
+    //                     }
+    //
+    //                     if (isStatic) {
+    //                         ctx.DrawBitmap(Images.OverlayStatic.PlatformImpl, 1.0, iconRect, iconRect);
+    //                     }
+    //
+    //                 }
+    //
+    //             }
 
                 // TODO: image.Freeze()
                 return image;

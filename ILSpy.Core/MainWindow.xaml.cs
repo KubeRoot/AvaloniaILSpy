@@ -691,8 +691,8 @@ namespace ICSharpCode.ILSpy
 
 		void MainWindow_Loaded(object sender, EventArgs e)
 		{
-			var focusManager = TopLevel.GetTopLevel(this).FocusManager;
-			focusManager.GetFocusedElement().Focus();
+			// var focusManager = TopLevel.GetTopLevel(this).FocusManager;
+			// focusManager.GetFocusedElement().Focus();
 
 			InitToolbar();
 
