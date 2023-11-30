@@ -10,10 +10,38 @@
         UseLayoutRounding="True"
         Icon="/Images/ILSpy.png"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d:DesignHeight="500" d:DesignWidth="500"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=netstandard"
+        mc:Ignorable="d"
         x:Class="ICSharpCode.ILSpy.MainWindow"
 >
-  <NativeMenu.Menu>
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+		            <Color x:Key="ThemeCodeBackgroundColor">#FFFFFFE1</Color>
+		            <Color x:Key="ThemeCodeForegroundColor">#FF000000</Color>
+
+		            <SolidColorBrush x:Key="ThemeCodeBackgroundBrush" Color="{DynamicResource ThemeCodeBackgroundColor}"></SolidColorBrush>
+		            <SolidColorBrush x:Key="ThemeCodeForegroundBrush" Color="{DynamicResource ThemeCodeForegroundColor}"></SolidColorBrush>
+		            
+		            <system:String x:Key="CSharp-Mode">Themes/CSharp-Mode.xshd</system:String>
+		            <system:String x:Key="ILAsm-Mode">Themes/ILAsm-Mode.xshd</system:String>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+		            <Color x:Key="ThemeCodeBackgroundColor">#FF1E1E1E</Color>
+		            <Color x:Key="ThemeCodeForegroundColor">#FFFFFFFF</Color>
+
+		            <SolidColorBrush x:Key="ThemeCodeBackgroundBrush" Color="{DynamicResource ThemeCodeBackgroundColor}"></SolidColorBrush>
+		            <SolidColorBrush x:Key="ThemeCodeForegroundBrush" Color="{DynamicResource ThemeCodeForegroundColor}"></SolidColorBrush>
+		            
+		            <system:String x:Key="CSharp-Mode">Themes/CSharp-Mode-Dark.xshd</system:String>
+		            <system:String x:Key="ILAsm-Mode">Themes/ILAsm-Mode.xshd</system:String>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	<NativeMenu.Menu>
     <NativeMenu>
     </NativeMenu>
   </NativeMenu.Menu>

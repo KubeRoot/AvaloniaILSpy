@@ -1,33 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <UserControl x:Class="ICSharpCode.ILSpy.Controls.ResourceStringTable"
-    xmlns="https://github.com/avaloniaui" 
-    xmlns:properties="clr-namespace:ICSharpCode.ILSpy.Properties"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Workaround for https://github.com/AvaloniaUI/Avalonia/issues/2593 -->
-  <x:Arguments>
-    <x:Null />
-    <x:Null />
-  </x:Arguments>
+             xmlns="https://github.com/avaloniaui"
+             xmlns:properties="clr-namespace:ICSharpCode.ILSpy.Properties"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<!-- Workaround for https://github.com/AvaloniaUI/Avalonia/issues/2593 -->
+	<x:Arguments>
+		<x:Null />
+		<x:Null />
+	</x:Arguments>
 	<Grid Margin="5,0,0,0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30" />
 			<RowDefinition />
 		</Grid.RowDefinitions>
 		<TextBlock Margin="5" Text="{x:Static properties:Resources.StringTable}"
-			   FontFamily="Segoe UI"
-			   FontWeight="Bold"
-			   FontSize="12" />
-        <DataGrid Name="resourceListView"
-                  FontFamily="Segoe UI"
-                  FontSize="9"
-                  Grid.Row="1"
-                  RowBackground="{DynamicResource ThemeBackgroundBrush}"
-                  AlternatingRowBackground="{DynamicResource ThemeAccentBrush4}"
-                  CanUserResizeColumns="True">
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="{x:Static properties:Resources.Name}" Binding="{Binding Key}" Width="*" />
-            <DataGridTextColumn Header="{x:Static properties:Resources.Value}" Binding="{Binding Value}" Width="*" />
-          </DataGrid.Columns>
-        </DataGrid>
+		           FontFamily="Segoe UI"
+		           FontWeight="Bold"
+		           FontSize="12" />
+		<DataGrid Name="resourceListView"
+		          FontFamily="Segoe UI"
+		          FontSize="9"
+		          Grid.Row="1"
+		          RowBackground="{DynamicResource ThemeBackgroundBrush}"
+		          CanUserResizeColumns="True">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="{x:Static properties:Resources.Name}" Binding="{Binding Key}" Width="*" />
+				<DataGridTextColumn Header="{x:Static properties:Resources.Value}" Binding="{Binding Value}" Width="*" />
+			</DataGrid.Columns>
+			<DataGrid.RowTheme>
+				<ControlTheme TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+					<ControlTheme.Children>
+						<Style Selector="^:nth-child(2n)">
+							<Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+						</Style>
+					</ControlTheme.Children>
+				</ControlTheme>
+			</DataGrid.RowTheme>
+		</DataGrid>
 	</Grid>
 </UserControl>

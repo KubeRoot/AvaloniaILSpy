@@ -178,38 +178,44 @@ namespace ICSharpCode.ILSpy
 			bottomPane.CloseButtonClicked += BottomPane_CloseButtonClicked;
 
 			List<string> themeNames = new List<string>();
-			List<IStyle> themes = new List<IStyle>();
-			foreach(string file in Directory.EnumerateFiles("Themes", "*.xaml"))
+			List<ThemeVariant> themes = new List<ThemeVariant> { ThemeVariant.Light, ThemeVariant.Dark };
+			for(int i = 0; i < themes.Count; i++)
 			{
-				try
-				{
-					var theme = AvaloniaRuntimeXamlLoader.Parse<Styles>(File.ReadAllText(file));
-					themes.Add(theme);
-					themeNames.Add(Path.GetFileNameWithoutExtension(file));
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message, $"Unable to load theme on {file}");
-				}
+				themeNames.Add(themes[i].ToString());
 			}
+			// foreach(string file in Directory.EnumerateFiles("Themes", "*.xaml"))
+			// {
+			// 	try
+			// 	{
+			// 		var theme = AvaloniaRuntimeXamlLoader.Parse<Styles>(File.ReadAllText(file));
+			// 		themes.Add(theme);
+			// 		themeNames.Add(Path.GetFileNameWithoutExtension(file));
+			// 	}
+			// 	catch (Exception ex)
+			// 	{
+			// 		MessageBox.Show(ex.Message, $"Unable to load theme on {file}");
+			// 	}
+			// }
 
-			if (themes.Count == 0)
-			{
-				var light = AvaloniaRuntimeXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default'/>");
-				themes.Add(light);
-				themeNames.Add("Light");
-			}
+			// if (themes.Count == 0)
+			// {
+			// 	var light = AvaloniaRuntimeXamlLoader.Parse<StyleInclude>(@"<StyleInclude xmlns='https://github.com/avaloniaui' Source='resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default'/>");
+			// 	themes.Add(light);
+			// 	themeNames.Add("Light");
+			// }
 
 			var themesDropDown = this.Find<ComboBox>("Themes");
+			themesDropDown.Items.Clear();
 			themesDropDown.ItemsSource = themeNames;
 			themesDropDown.SelectionChanged += (sender, e) =>
 			{
-				Styles[0] = themes[themesDropDown.SelectedIndex];
+				// Styles[0] = themes[themesDropDown.SelectedIndex];
 				sessionSettings.Theme = themeNames[themesDropDown.SelectedIndex];
-				ApplyTheme();
+				// ApplyTheme();
+				GetTopLevel(this).RequestedThemeVariant = themes[themesDropDown.SelectedIndex];
 			};
 
-			Styles.Add(themes[0]);
+			// Styles.Add(themes[0]);
 			int selectedTheme = themeNames.IndexOf(sessionSettings.Theme);
 			themesDropDown.SelectedIndex = selectedTheme < 0? 0: selectedTheme;
 
