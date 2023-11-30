@@ -102,9 +102,9 @@ namespace ICSharpCode.TreeView
       base.OnPropertyChanged(change);
       if (change.Property == DataContextProperty)
       {
-				var e = (AvaloniaPropertyChangedEventArgs<SharpTreeNode>)change;
-				var oldTransitions = e.OldValue.GetValueOrDefault();
-				var newTransitions = e.NewValue.GetValueOrDefault();
+				// var e = (AvaloniaPropertyChangedEventArgs<SharpTreeNode>)change;
+				var oldTransitions = change.OldValue as SharpTreeNode;
+				var newTransitions = change.NewValue as SharpTreeNode;
 
         UpdateDataContext(oldTransitions, newTransitions);
       }

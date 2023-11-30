@@ -192,6 +192,11 @@ namespace ICSharpCode.TreeView
 			}
 		}
 
+		protected override Control CreateContainerForItemOverride(object item, int index, object recycleKey)
+		{
+			return new SharpTreeViewItem();
+		}
+
 		// Avalonia v11 - Removing, not being referenced.. Should we use, CreateContainerForItemOverride()?
 		////[Obsolete("Marked for removal in Avalonia v12")]
 		////protected override IItemContainerGenerator CreateItemContainerGenerator()
