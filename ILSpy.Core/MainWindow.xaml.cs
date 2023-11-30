@@ -367,6 +367,7 @@ namespace ICSharpCode.ILSpy
 				}
 			}
 
+			toolBar.Items.Clear();
 			toolBar.ItemsSource = toolbarItems;
 		}
 
@@ -427,6 +428,7 @@ namespace ICSharpCode.ILSpy
 				topLevelMenuItem.ItemsSource = topLevelMenuItems;
 			}
 
+			mainMenu.Items.Clear();
 			mainMenu.ItemsSource = mainMenuItems;
 		}
 
