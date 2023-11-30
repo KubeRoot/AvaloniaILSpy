@@ -164,7 +164,7 @@ namespace ICSharpCode.ILSpy.Search
 			updateResultTimer.Stop();
 		}
 		
-		void ListBox_MouseDoubleClick(object sender, RoutedEventArgs e)
+		void ListBox_MouseDoubleClick(object sender, TappedEventArgs e)
 		{
 			JumpToSelectedItem();
 			e.Handled = true;
