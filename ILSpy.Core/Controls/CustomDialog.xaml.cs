@@ -80,7 +80,7 @@ namespace ICSharpCode.ILSpy.Controls
 		void ButtonClick(object sender, RoutedEventArgs e)
 		{
             Button button = sender as Button;
-            int index = buttons.ItemContainerGenerator.IndexFromContainer(button.Parent);
+            int index = buttons.IndexFromContainer(button.Parent as ListBoxItem);
             this.Close(index);
 			e.Handled = true;
 		}
