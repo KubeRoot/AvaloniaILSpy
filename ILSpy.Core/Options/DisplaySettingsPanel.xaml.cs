@@ -46,24 +46,24 @@ namespace ICSharpCode.ILSpy.Options
 		{
 			InitializeComponent();
 
-            Task<FontFamily[]> task = new Task<FontFamily[]>(FontLoader);
-			task.Start();
-			task.ContinueWith(
-				delegate(Task continuation) {
-					Dispatcher.UIThread.InvokeAsync(
-						(Action)(
-							async () => {
-								fontSelector.ItemsSource = task.Result;
-								if (continuation.Exception != null) {
-									foreach (var ex in continuation.Exception.InnerExceptions) {
-										await MessageBox.Show(ex.ToString());
-									}
-								}
-							}),
-						DispatcherPriority.Normal
-					);
-				}
-			);
+			// Task<FontFamily[]> task = new Task<FontFamily[]>(FontLoader);
+			// task.Start();
+			// task.ContinueWith(
+			// 	delegate(Task continuation) {
+			// 		Dispatcher.UIThread.InvokeAsync(
+			// 			(Action)(
+			// 				async () => {
+			// 					fontSelector.ItemsSource = task.Result;
+			// 					if (continuation.Exception != null) {
+			// 						foreach (var ex in continuation.Exception.InnerExceptions) {
+			// 							await MessageBox.Show(ex.ToString());
+			// 						}
+			// 					}
+			// 				}),
+			// 			DispatcherPriority.Normal
+			// 		);
+			// 	}
+			// );
 		}
 
 		private void InitializeComponent()
@@ -101,18 +101,18 @@ namespace ICSharpCode.ILSpy.Options
 		//	}
 		//	return false;
 		//}
-		
-		static FontFamily[] FontLoader()
-		{
-			// TODO: filter SymbolFonts
-			return FontManager.Current.GetInstalledFontFamilyNames().Select(x => new FontFamily(x)).ToArray();
-		}
+
+		// static FontFamily[] FontLoader()
+		// {
+		// 	// TODO: filter SymbolFonts
+		// 	// return FontManager.Current.GetInstalledFontFamilyNames().Select(x => new FontFamily(x)).ToArray();
+		// }
 
 		public static DisplaySettings LoadDisplaySettings(ILSpySettings settings)
 		{
 			XElement e = settings["DisplaySettings"];
 			var s = new DisplaySettings();
-			s.SelectedFont = new FontFamily((string)e.Attribute("Font") ?? FontManager.Current.DefaultFontFamilyName);
+			s.SelectedFont = e.Attribute("Font") == null ? new FontFamily((string)e.Attribute("Font")) : FontManager.Current.DefaultFontFamily;
 			s.SelectedFontSize = (double?)e.Attribute("FontSize") ?? 10.0 * 4 / 3;
 			s.ShowLineNumbers = (bool?)e.Attribute("ShowLineNumbers") ?? false;
             s.ShowDebugInfo = (bool?)e.Attribute("ShowDebugInfo") ?? false;

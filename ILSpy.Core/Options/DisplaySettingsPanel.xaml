@@ -24,7 +24,7 @@
 					<RowDefinition Height="50" />
 				</Grid.RowDefinitions>
 				<TextBlock Margin="2" VerticalAlignment="Center" Text="{x:Static properties:Resources.DisplaySettingsPanel_Font}" />
-				<ComboBox x:Name="fontSelector" SelectedItem="{Binding SelectedFont}" Grid.Column="1">
+				<ComboBox x:Name="fontSelector" SelectedItem="{Binding SelectedFont}" ItemsSource="{Binding FontManager.Current.SystemFonts}" Grid.Column="1">
 					<ComboBox.ItemTemplate>
 						<DataTemplate>
 							<TextBlock Text="{Binding Name}" FontFamily="{Binding}" />
