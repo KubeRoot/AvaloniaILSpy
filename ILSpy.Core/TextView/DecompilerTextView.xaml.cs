@@ -83,6 +83,7 @@ namespace ICSharpCode.ILSpy.TextView
         internal Border waitAdorner;
         internal ProgressBar progressBar;
         internal Button cancelButton;
+        internal Point pointerPosition = default;
 
         #region Constructor
         public DecompilerTextView()
@@ -174,7 +175,8 @@ namespace ICSharpCode.ILSpy.TextView
         }
 
         void TextViewMouseHover(object sender, PointerEventArgs e)
-		{
+        {
+	        pointerPosition = e.GetPosition(textEditor.TextArea.TextView);
 			TextViewPosition? position = GetPositionFromMousePosition();
 			if (position == null)
 				return;
@@ -640,6 +642,7 @@ namespace ICSharpCode.ILSpy.TextView
 		{
 			if (mouseDownPos == null)
 				return;
+			pointerPosition = e.GetPosition(textEditor.TextArea.TextView);
 			Vector dragDistance = e.GetPosition(this) - mouseDownPos.Value;
 			if (Math.Abs(dragDistance.X) < SystemParameters.MinimumHorizontalDragDistance
 				&& Math.Abs(dragDistance.Y) < SystemParameters.MinimumVerticalDragDistance
@@ -792,8 +795,7 @@ namespace ICSharpCode.ILSpy.TextView
 		
 		internal TextViewPosition? GetPositionFromMousePosition()
 		{
-            IPointerDevice mouse = MainWindow.Instance.PlatformImpl.MouseDevice;
-            var position = textEditor.TextArea.TextView.GetPosition(mouse.GetPosition(textEditor.TextArea.TextView) + textEditor.TextArea.TextView.ScrollOffset);
+            var position = textEditor.TextArea.TextView.GetPosition(pointerPosition + textEditor.TextArea.TextView.ScrollOffset);
 			if (position == null)
 				return null;
 			var lineLength = textEditor.Document.GetLineByNumber(position.Value.Line).Length + 1;
