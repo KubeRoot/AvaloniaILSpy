@@ -98,7 +98,7 @@ namespace ICSharpCode.ILSpy
 					List<string> hierachy = new List<string>();
 					hierachy.Add(visual.ToString());
 					////while ((visual = visual.Parent) != null)
-					while ((visual = visual.Parent) != null)
+					while ((visual = visual.Parent as Control) != null)
 					{
 						hierachy.Insert(0, visual.ToString());
 					}
