@@ -4,6 +4,9 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+
+using AvaloniaEdit.Utils;
+
 using ICSharpCode.ILSpy.Controls;
 using ICSharpCode.TreeView;
 
