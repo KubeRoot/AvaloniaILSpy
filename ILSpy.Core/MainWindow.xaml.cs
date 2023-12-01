@@ -346,9 +346,9 @@ namespace ICSharpCode.ILSpy
 		void InitToolbar()
 		{
 			int navigationPos = 0;
-			int openPos = 0;
+			int openPos = 1;
 			var toolbarCommands = App.ExportProvider.GetExports<ICommand, IToolbarCommandMetadata>("ToolbarCommand");
-			var toolbarItems = toolBar.ItemsSource as IList<object> ?? new List<object>();
+			var toolbarItems = toolBar.Items.ToList() as IList<object> ?? new List<object>();
 			foreach (var commandGroup in toolbarCommands.OrderBy(c => c.Metadata.ToolbarOrder).GroupBy(c => Properties.Resources.ResourceManager.GetString(c.Metadata.ToolbarCategory))) {
 				if (commandGroup.Key == Properties.Resources.ResourceManager.GetString("Navigation")) {
 					foreach (var command in commandGroup) {
