@@ -114,7 +114,7 @@ namespace ICSharpCode.ILSpy.Options
 		{
 			XElement e = settings["DisplaySettings"];
 			var s = new DisplaySettings();
-			s.SelectedFont = e.Attribute("Font") == null ? new FontFamily((string)e.Attribute("Font")) : FontManager.Current.DefaultFontFamily;
+			s.SelectedFont = e.Attribute("Font") != null ? new FontFamily((string)e.Attribute("Font")) : FontManager.Current.DefaultFontFamily;
 			s.SelectedFontSize = (double?)e.Attribute("FontSize") ?? 10.0 * 4 / 3;
 			s.ShowLineNumbers = (bool?)e.Attribute("ShowLineNumbers") ?? false;
             s.ShowDebugInfo = (bool?)e.Attribute("ShowDebugInfo") ?? false;
