@@ -46,6 +46,8 @@ namespace ICSharpCode.ILSpy.Options
 		{
 			InitializeComponent();
 
+			fontSelector.ItemsSource = FontManager.Current.SystemFonts.Select(font => new FontFamily(font.Name));
+
 			// Task<FontFamily[]> task = new Task<FontFamily[]>(FontLoader);
 			// task.Start();
 			// task.ContinueWith(
@@ -194,6 +196,10 @@ namespace ICSharpCode.ILSpy.Options
 
             if (value is double dd) {
                 return dd * 4 / 3;
+            }
+
+            if (value is decimal dec) {
+                return dec * 4 / 3;
             }
 
             if (value is string s) {
