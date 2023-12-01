@@ -394,7 +394,7 @@ namespace ICSharpCode.ILSpy
 		void InitMainMenu()
 		{
 			var mainMenuCommands = App.ExportProvider.GetExports<ICommand, IMainMenuCommandMetadata>("MainMenuCommand");
-			var mainMenuItems = mainMenu.ItemsSource as IList<object> ?? new List<object>();
+			var mainMenuItems = mainMenu.Items.ToList() as IList<object> ?? new List<object>();
 			foreach (var topLevelMenu in mainMenuCommands.OrderBy(c => c.Metadata.MenuOrder).GroupBy(c => GetResourceString(c.Metadata.Menu))) {
 				MenuItem topLevelMenuItem = mainMenu.Items.OfType<MenuItem>().FirstOrDefault(m => (GetResourceString(m.Header as string)) == topLevelMenu.Key);
 				var topLevelMenuItems = topLevelMenuItem?.Items as IList<object> ?? new List<object>();
