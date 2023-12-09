@@ -148,10 +148,12 @@ namespace ICSharpCode.ILSpy
 			switch (pointerUpdateKind)
 			{
 				case PointerUpdateKind.XButton1Pressed:
-					NavigateHistory(false);
+					if(history.CanNavigateBack)
+						NavigateHistory(false);
 					break;
 				case PointerUpdateKind.XButton2Pressed:
-					NavigateHistory(true);
+					if(history.CanNavigateForward)
+						NavigateHistory(true);
 					break;
 				default:
 					return;
